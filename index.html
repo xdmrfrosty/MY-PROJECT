@@ -1,0 +1,77 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>To-Do List</title>
+
+  <!-- ✅ Favicon setup -->
+  <link rel="icon" href="favicon.ico" type="image/x-icon">
+  <link rel="icon" type="image/png" sizes="32x32" href="favicon-32.png">
+  <link rel="icon" type="image/png" sizes="192x192" href="favicon-192.png">
+  <link rel="icon" type="image/png" sizes="512x512" href="favicon-512.png">
+  <link rel="apple-touch-icon" href="favicon-192.png">
+
+  <!-- ✅ Manifest (PWA setup) -->
+  <link rel="manifest" href="manifest.json">
+
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+  <div class="app">
+    <header>
+      <h1>To-Do List</h1>
+      <button id="theme-toggle">☀️</button>
+    </header>
+
+    <main>
+      <!-- Tabs -->
+      <div class="tabs">
+        <button class="tab active" data-tab="tasks">Tasks</button>
+        <button class="tab" data-tab="completed">Completed</button>
+        <button class="tab" data-tab="trash">Trash</button>
+      </div>
+
+      <!-- Tasks Tab -->
+      <div id="tasks" class="tab-content active">
+        <form id="task-form">
+          <input type="text" id="task-input" placeholder="Add a new task..." required>
+          <button type="submit" id="add-btn">Add</button>
+        </form>
+        <ul id="task-list"></ul>
+      </div>
+
+      <!-- Completed Tab -->
+      <div id="completed" class="tab-content">
+        <ul id="completed-list"></ul>
+        <button id="clear-completed">Clear Completed</button>
+      </div>
+
+      <!-- Trash Tab -->
+      <div id="trash" class="tab-content">
+        <ul id="trash-list"></ul>
+      </div>
+    </main>
+  </div>
+
+  <!-- ✅ Undo popup (toast) -->
+  <div id="undo-popup" class="hidden">
+    <span id="undo-message"></span>
+    <button id="undo-btn">Undo</button>
+  </div>
+
+  <!-- Confetti library -->
+  <script src="https://cdn.jsdelivr.net/npm/canvas-confetti@1.6.0/dist/confetti.browser.min.js"></script>
+  <script src="script.js"></script>
+
+  <!-- ✅ Register service worker -->
+  <script>
+    if ("serviceWorker" in navigator) {
+      navigator.serviceWorker
+        .register("service-worker.js")
+        .then(() => console.log("✅ Service Worker registered"))
+        .catch(err => console.log("❌ Service Worker failed", err));
+    }
+  </script>
+</body>
+</html>
